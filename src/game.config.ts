@@ -8,7 +8,7 @@
 export const GAME_CONFIG = {
   id: 'flow',
   title: 'Flow Fighter',
-  tagline: 'A two-player fighting duel. Work in progress.',
+  tagline: 'Pick a card, reveal together, climb the ladder. First to the trophy wins.',
 } as const
 
 /** The Supabase table this game owns. Must match supabase/migrations/. */

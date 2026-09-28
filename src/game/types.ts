@@ -1,28 +1,34 @@
 import type { PlayerSlot } from '../platform/types'
 
-export type Hand = 'rock' | 'paper' | 'scissors'
+export type BasicMoveId = 'attack' | 'block' | 'throw'
 
-export interface RpsSettings {
-  /** Round wins needed to take the match. */
-  targetScore: number
+export type MoveId = BasicMoveId | 'special'
+
+export type StyleId = 'crane' | 'tiger'
+
+export interface FlowSettings {
+  styles: Record<PlayerSlot, StyleId>
 }
 
-export interface RpsPlan {
+export interface FlowPlan {
   turn: number
-  hand: Hand
+  move: MoveId
 }
 
 export interface RoundResult {
-  p1Hand: Hand
-  p2Hand: Hand
-  /** Null on a draw. */
-  winner: PlayerSlot | null
+  moves: Record<PlayerSlot, MoveId>
+  /** Steps at the start of the round, before any card resolved. */
+  stepsBefore: Record<PlayerSlot, number>
+  /** Players whose card took effect: none, one (it beat the other) or both (a mirror). */
+  resolvedBy: PlayerSlot[]
 }
 
-export interface RpsState {
+export type MatchResult = { kind: 'win'; winner: PlayerSlot } | { kind: 'draw' }
+
+export interface FlowState {
   turn: number
-  targetScore: number
-  scores: Record<PlayerSlot, number>
+  styles: Record<PlayerSlot, StyleId>
+  steps: Record<PlayerSlot, number>
   lastRound: RoundResult | null
-  matchWinner: PlayerSlot | null
+  result: MatchResult | null
 }
