@@ -1,10 +1,10 @@
 {
-  "name": "game-template",
+  "name": "flowfighter",
   "private": true,
   "version": "0.1.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/poeticmatter/game-template"
+    "url": "https://github.com/poeticmatter/FlowFighter"
   },
   "type": "module",
   "scripts": {

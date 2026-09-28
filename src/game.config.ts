@@ -6,9 +6,9 @@
  * never collide on shared infrastructure.
  */
 export const GAME_CONFIG = {
-  id: 'template',
-  title: 'Game Template',
-  tagline: 'Rock, paper, scissors: an example game. Replace src/game/ with your own.',
+  id: 'flow',
+  title: 'Flow Fighter',
+  tagline: 'A two-player fighting duel. Work in progress.',
 } as const
 
 /** The Supabase table this game owns. Must match supabase/migrations/. */
