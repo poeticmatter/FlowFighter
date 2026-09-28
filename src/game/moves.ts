@@ -3,28 +3,46 @@ import type { BasicMoveId, MoveId } from './types'
 interface MoveInfo {
   label: string
   color: string
-  /** Shown on the move card, matching the board game's card text. */
-  effect: string
+  /** The printed card's effect text, word for word from the board game's cards.json. */
+  cardText: string
+  /** The basic move this one beats; Special's matchups depend on the step instead. */
+  stops: BasicMoveId | null
+  /** Printed under the effect when the card has its own mirror rule. */
+  mirrorRule?: string
 }
 
 export const MOVES: Record<MoveId, MoveInfo> = {
-  attack: { label: 'Attack', color: '#dc2626', effect: 'At the top, you win. Otherwise go up 1.' },
-  block: { label: 'Block', color: '#2563eb', effect: 'Opponent goes down 1.' },
-  throw: { label: 'Throw', color: '#16a34a', effect: 'Opponent at the bottom? You win. Otherwise they drop to 1.' },
-  special: { label: 'Special', color: '#7c3aed', effect: 'Depends on your step. Win it and follow the purple arrow.' },
+  attack: {
+    label: 'Attack',
+    color: '#dc2626',
+    cardText: 'If you are at the top, you win. Otherwise, go up 1 step.',
+    stops: 'throw',
+  },
+  block: {
+    label: 'Block',
+    color: '#2563eb',
+    cardText: 'Opponent goes down 1 step.',
+    stops: 'attack',
+  },
+  throw: {
+    label: 'Throw',
+    color: '#16a34a',
+    cardText: 'If your opponent is at the bottom, you win. Otherwise, opponent goes down to step 1.',
+    stops: 'block',
+  },
+  special: {
+    label: 'Special',
+    color: '#7c3aed',
+    cardText: 'Follow the purple arrows.',
+    stops: null,
+    mirrorRule: 'Higher step wins. Same step: nothing happens.',
+  },
 }
 
 export const MOVE_IDS: MoveId[] = ['attack', 'block', 'throw', 'special']
 
 export const BASIC_MOVE_IDS: BasicMoveId[] = ['attack', 'block', 'throw']
 
-/** The rock-paper-scissors triangle: each basic move beats exactly one other. */
-const BEATS: Record<BasicMoveId, BasicMoveId> = {
-  attack: 'throw',
-  block: 'attack',
-  throw: 'block',
-}
-
 export function doesBasicMoveBeat(move: BasicMoveId, opponentMove: BasicMoveId): boolean {
-  return BEATS[move] === opponentMove
+  return MOVES[move].stops === opponentMove
 }

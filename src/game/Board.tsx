@@ -3,6 +3,7 @@ import type { BoardProps, PlayerSlot, UserRole } from '../platform/types'
 import { MoveChip } from './glyphs'
 import { MoveHand } from './MoveHand'
 import { describeExchange } from './roundSummary'
+import { RulesButton } from './RulesButton'
 import { StyleBoard } from './StyleBoard'
 import type { FlowPlan, FlowState, MatchResult, MoveId, RoundResult } from './types'
 
@@ -85,10 +86,13 @@ export function FlowBoard({ state, role, hasCommitted, onSubmitPlan }: BoardProp
 
   return (
     <div className="flex min-h-screen flex-col items-center gap-6 p-4 sm:p-6">
-      <p className="text-sm text-neutral-500">
-        Round {state.turn}
-        {role === 'spectator' && <span className="ml-2 text-purple-400">· Spectating</span>}
-      </p>
+      <div className="flex items-center gap-4">
+        <p className="text-sm text-neutral-500">
+          Round {state.turn}
+          {role === 'spectator' && <span className="ml-2 text-purple-400">· Spectating</span>}
+        </p>
+        <RulesButton />
+      </div>
 
       <div className="flex w-full flex-col items-center gap-4 md:flex-row md:items-start md:justify-center">
         {seatingOrder(role).map(slot => (

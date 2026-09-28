@@ -1,4 +1,5 @@
 import type { PlayerSlot, SettingsFormProps } from '../platform/types'
+import { RulesButton } from './RulesButton'
 import { STYLE_IDS, STYLES } from './styles'
 import type { FlowSettings, StyleId } from './types'
 
@@ -38,6 +39,9 @@ function StylePicker({ label, selected, onSelect }: StylePickerProps) {
 export function FlowSettingsForm({ settings, onChange }: SettingsFormProps<FlowSettings>) {
   return (
     <>
+      <div className="flex justify-center">
+        <RulesButton />
+      </div>
       {([1, 2] as const).map(slot => (
         <StylePicker
           key={slot}

@@ -17,7 +17,7 @@ npm run init-game -- <repo-name> <game-id> "<Title>"   # one-time rename of a fr
 
 A two-player, simultaneous-turn browser game with no backend of its own. It is part of the game lab (poeticmatter/game-lab); each game lives in its own repo created from poeticmatter/game-template.
 
-- `src/game/`: the game. Pure rules (`rules.ts`, with `moves.ts` and the Style boards in `styles.ts`), React UI (`Board.tsx`, `StyleBoard.tsx`, `MoveHand.tsx`, `SettingsForm.tsx`), and `index.ts` exporting `game: GameModule`. Glyphs in `glyphs.tsx` are ported from the board game's asset repo.
+- `src/game/`: the game. Pure rules (`rules.ts`, with `moves.ts` and the Style boards in `styles.ts`), React UI (`Board.tsx`, `StyleBoard.tsx` with its arrows in `LadderArrows.tsx` and geometry in `boardLayout.ts`, `MoveHand.tsx`, `RulesButton.tsx`, `SettingsForm.tsx`), and `index.ts` exporting `game: GameModule`. Glyphs in `glyphs.tsx` are ported from the board game's asset repo.
 - `src/platform/`: game-agnostic lobby, transports and screens. It only sees the game through the `GameModule` / `GameRules` contracts in `src/platform/types.ts`.
 - `src/game.config.ts`: the game id, title and Supabase table name.
 - `src/App.tsx`: wires the game into the platform and routes on the URL (`?room=CODE[&mode=async]`).
