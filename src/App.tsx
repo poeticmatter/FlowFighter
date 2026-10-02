@@ -49,7 +49,24 @@ interface ActiveRoom {
   settings: GameSettings | null
 }
 
+function RemoteTestBanner() {
+  return (
+    <div className="bg-fuchsia-600 px-4 py-3 text-center text-lg font-bold text-white">
+      Claude Code remote worked!
+    </div>
+  )
+}
+
 export default function App() {
+  return (
+    <>
+      <RemoteTestBanner />
+      <AppRoutes />
+    </>
+  )
+}
+
+function AppRoutes() {
   const [room, setRoom] = useState<ActiveRoom | null>(() => {
     const link = readRoomLinkFromUrl()
     return link ? { link, settings: null } : null
